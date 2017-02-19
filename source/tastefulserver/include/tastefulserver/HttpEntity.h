@@ -44,11 +44,13 @@ public:
 
     virtual void writeTo(QIODevice & device) const;
 protected:
+
+    virtual void writeHeadersOn(QIODevice & device) const;
+    void writeHeaderOn(const HttpHeader & header, QIODevice & device) const;
+
     QHash<QString, QList<HttpHeader>> m_headers;
     QByteArray m_content;
 
-    void writeHeaderOn(const HttpHeader & header, QIODevice & device) const;
-    virtual void writeHeadersOn(QIODevice & device) const;
 };
 
 } // namespace tastefulserver

@@ -1,20 +1,45 @@
+#include <thread>
+#include <QList>
 #include "ThreadPool.h"
 
 #include <tastefulserver/Task.h>
 
 namespace tastefulserver {
 
+class ThreadPool;
+
+class ThreadPoolPrivate {
+    Q_DECLARE_PUBLIC(ThreadPool)
+public:
+    explicit ThreadPoolPrivate(ThreadPool* pool):q_ptr(pool)
+    {
+
+    }
+    virtual ~ThreadPoolPrivate()
+    {
+
+    }
+
+private:
+    ThreadPool* q_ptr = nullptr;
+    bool m_started = false;
+    int m_threadCount = 0;
+    unsigned m_next = 0;
+    QList<TaskThread *> m_threads;
+};
+
 ThreadPool::ThreadPool(int numThreads)
-: m_started(false)
-, m_threadCount(0)
-, m_next(0)
+    : d_ptr(new ThreadPoolPrivate(this))
 {
+    if (numThreads <= 0)
+        numThreads = std::thread::hardware_concurrency();
     setNumThreads(numThreads);
 }
 
 void ThreadPool::setNumThreads(int numThreads)
 {
-    if (m_started)
+    Q_D(ThreadPool);
+    if (d->m_started)
     {
         return;
     }
@@ -27,48 +52,52 @@ void ThreadPool::setNumThreads(int numThreads)
             numThreads = 1;
         }
     }
-    m_threadCount = numThreads;
+    d->m_threadCount = numThreads;
 }
 
 bool ThreadPool::isStarted() const
 {
-    return m_started;
+    Q_D(const ThreadPool);
+    return d->m_started;
 }
 
 void ThreadPool::start()
 {
-    if (m_started)
+    Q_D(ThreadPool);
+    if (d->m_started)
     {
         return;
     }
 
-    for (int i = 0;i<m_threadCount;++i)
+    for (int i = 0;i<d->m_threadCount;++i)
     {
         TaskThread * thread = new TaskThread();
-        m_threads << thread;
+        d->m_threads << thread;
         thread->start();
     }
-    m_started = true;
+    d->m_started = true;
 }
 
 void ThreadPool::stop()
 {
-    if (!m_started)
+    Q_D(ThreadPool);
+    if (!d->m_started)
     {
         return;
     }
 
-    for (TaskThread * thread : m_threads)
+    for (TaskThread * thread : d->m_threads)
     {
         thread->terminate();
         delete thread;
     }
-    m_started = false;
+    d->m_started = false;
 }
 
 ThreadPool::~ThreadPool()
 {
-    if (m_started)
+    Q_D(ThreadPool);
+    if (d->m_started)
     {
         stop();
     }
@@ -76,8 +105,9 @@ ThreadPool::~ThreadPool()
 
 void ThreadPool::addTask(Task * task)
 {
-    m_threads[m_next]->addTask(task);
-    m_next = (m_next + 1) % m_threadCount;
+    Q_D(ThreadPool);
+    d->m_threads[d->m_next]->addTask(task);
+    d->m_next = (d->m_next + 1) % d->m_threadCount;
 }
 
 } // namespace tastefulserver

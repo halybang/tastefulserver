@@ -1,12 +1,12 @@
 #pragma once
+#include <QScopedPointer>
 
-#include <QList>
 
 namespace tastefulserver {
 
 class Task;
 class TaskThread;
-
+class ThreadPoolPrivate;
 class ThreadPool
 {
 public:
@@ -21,10 +21,11 @@ public:
     void addTask(Task * task);
 
 protected:
-    bool m_started;
-    int m_threadCount;
-    unsigned m_next;
-    QList<TaskThread *> m_threads;
+
+private:
+    Q_DECLARE_PRIVATE(ThreadPool)
+    QScopedPointer<ThreadPoolPrivate> d_ptr;
+
 };
 
 } // namespace tastefulserver

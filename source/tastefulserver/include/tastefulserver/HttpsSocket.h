@@ -16,12 +16,12 @@ public:
     HttpsSocket(HttpSocketHandler * handler, const QSslCertificate & certificate, const QSslKey & privateKe);
 
 protected:
+    virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;
+    virtual void addConnectionInfo(HttpRequest & request) override;
+
     QSslCertificate m_certificate;
     QSslKey m_privateKey;
 
-    virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;
-
-    virtual void addConnectionInfo(HttpRequest & request) override;
 };
 
 } // namespace tastefulserver

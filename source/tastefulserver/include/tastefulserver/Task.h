@@ -36,6 +36,7 @@ private:
     void startTask(Task * task);
 
 protected:
+private:
     QSet<Task *> m_tasks;
 };
 

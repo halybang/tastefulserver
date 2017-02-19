@@ -15,11 +15,11 @@ class TASTEFULSERVER_API HttpsServer : public TcpServer, public HttpSocketHandle
 public:
     HttpsServer(const QSslCertificate & certificate, const QSslKey & privateKey);
     ~HttpsServer();
-private:
+protected:
+    virtual AbstractSocket * createSocket() override;
+private:    
     QSslCertificate m_certificate;
     QSslKey m_privateKey;
-
-    virtual AbstractSocket * createSocket() override;
 };
 
 } // namespace tastefulserver

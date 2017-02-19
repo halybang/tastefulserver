@@ -28,11 +28,8 @@ public:
 
     void closeConnection();
 protected:
-    WebSocketHandler * m_handler;
-    WebSocketFrameParser m_parser;
-    WebSocketFrame m_fragmentedMessage;
-    bool m_inFragmentedMode;
-    HttpRequest m_request;
+    static const QString MagicString;
+    static QString hashKey(const QString & key);
 
     QAbstractSocket * createSocket(qintptr socketDescriptor);
 
@@ -41,8 +38,12 @@ protected:
     void sendFrame(const WebSocketFrame & frame);
     void sendPong();
 
-    static const QString MagicString;
-    static QString hashKey(const QString & key);
+    WebSocketHandler * m_handler;
+    WebSocketFrameParser m_parser;
+    WebSocketFrame m_fragmentedMessage;
+    bool m_inFragmentedMode;
+    HttpRequest m_request;
+
 protected slots:
     void badFrame();
     void connectionClosed();

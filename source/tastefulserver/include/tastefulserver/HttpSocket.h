@@ -19,15 +19,15 @@ public:
 
     void disconnect();
 protected:
+    virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;
     virtual void receiveData(const QByteArray & data) override;
+    virtual void addConnectionInfo(HttpRequest & request);
 
     HttpSocketHandler * m_handler;
     HttpRequestParser m_parser;
     HttpRequest m_request;
 
-    virtual void addConnectionInfo(HttpRequest & request);
 
-    virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;
 
 protected slots:
     void badRequest();
