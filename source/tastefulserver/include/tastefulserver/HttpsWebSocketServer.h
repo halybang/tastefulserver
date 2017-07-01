@@ -1,18 +1,16 @@
 #pragma once
 
 #include <tastefulserver/tastefulserver_api.h>
-#include <tastefulserver/TcpServer.h>
-#include <tastefulserver/HttpSocketHandler.h>
-#include <tastefulserver/HttpCallbackServer.h>
+#include <tastefulserver/HttpsCallbackServer.h>
 #include <tastefulserver/WebSocketHandler.h>
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API HttpWebSocketServer : public HttpCallbackServer, public WebSocketHandler
+class TASTEFULSERVER_API HttpsWebSocketServer : HttpsCallbackServer, public WebSocketHandler
 {
 public:
-    HttpWebSocketServer(const RequestCallback & callback, int numThreads = 1);
-    virtual ~HttpWebSocketServer();
+    HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey, const RequestCallback & callback);
+    virtual ~HttpsWebSocketServer();
 
 protected:
     //virtual AbstractSocket * createSocket() override;

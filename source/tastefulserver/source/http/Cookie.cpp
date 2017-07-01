@@ -170,7 +170,11 @@ const Cookie Cookies::operator[](const QString & name) const
 void Cookies::clear(Cookie & cookie)
 {
     cookie.setValue("deleted");
+#if QT_VERSION >= 0x050800
     cookie.setExpires(QDateTime::fromSecsSinceEpoch(0));
+#else
+    cookie.setExpires(QDateTime::fromTime_t(0));
+#endif
     m_cookies[cookie.getName()] = cookie;
 }
 

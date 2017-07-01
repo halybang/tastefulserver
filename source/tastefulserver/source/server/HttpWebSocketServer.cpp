@@ -7,17 +7,13 @@
 
 namespace tastefulserver {
 
-HttpWebSocketServer::HttpWebSocketServer()
+HttpWebSocketServer::HttpWebSocketServer(const RequestCallback & callback, int numThreads)
+    :HttpCallbackServer(callback, numThreads)
 {
 }
 
 HttpWebSocketServer::~HttpWebSocketServer()
 {
-}
-
-AbstractSocket * HttpWebSocketServer::createSocket()
-{
-    return new HttpSocket(this);
 }
 
 bool HttpWebSocketServer::handleUpgrade(HttpSocket * socket, const HttpRequest & request)
