@@ -14,7 +14,7 @@ public:
     HttpWebSocketServer(const RequestCallback & callback, int numThreads = 1);
     virtual ~HttpWebSocketServer();
 
-protected:
+protected:    
     //virtual AbstractSocket * createSocket() override;
 
     // --- handling ---

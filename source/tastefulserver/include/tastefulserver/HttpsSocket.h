@@ -13,7 +13,7 @@ namespace tastefulserver {
 class TASTEFULSERVER_API HttpsSocket : public HttpSocket
 {
 public:
-    HttpsSocket(HttpSocketHandler * handler, const QSslCertificate & certificate, const QSslKey & privateKe);
+    HttpsSocket(HttpSocketHandler * handler, const QSslCertificate & certificate, const QSslKey & privateKey);
 
 protected:
     virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;

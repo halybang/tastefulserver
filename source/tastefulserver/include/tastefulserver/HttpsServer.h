@@ -17,7 +17,6 @@ public:
     ~HttpsServer();
 protected:
     virtual AbstractSocket * createSocket() override;
-private:    
     QSslCertificate m_certificate;
     QSslKey m_privateKey;
 };

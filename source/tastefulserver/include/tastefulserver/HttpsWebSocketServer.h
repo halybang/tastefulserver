@@ -14,9 +14,9 @@ public:
 
 protected:
     //virtual AbstractSocket * createSocket() override;
-
     // --- handling ---
 
+    // TODO: Verify upgrade function
     virtual bool handleUpgrade(HttpSocket * socket, const HttpRequest & request) override;
     //virtual void handleRequest(HttpSocket * socket, const HttpRequest & request) override;
 

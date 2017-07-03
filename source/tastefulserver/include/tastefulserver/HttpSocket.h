@@ -27,8 +27,6 @@ protected:
     HttpRequestParser m_parser;
     HttpRequest m_request;
 
-
-
 protected slots:
     void badRequest();
 };

@@ -31,7 +31,7 @@ protected:
     static const QString MagicString;
     static QString hashKey(const QString & key);
 
-    QAbstractSocket * createSocket(qintptr socketDescriptor);
+    virtual QAbstractSocket * createSocket(qintptr socketDescriptor) override;
 
     virtual void receiveData(const QByteArray & data) override;
 

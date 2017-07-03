@@ -1,7 +1,7 @@
 #include <tastefulserver/HttpsWebSocketServer.h>
 
 #include <tastefulserver/HttpsSocket.h>
-#include <tastefulserver/WebSocket.h>
+#include <tastefulserver/WebsSocket.h>
 
 #include <QTimer>
 
@@ -20,7 +20,7 @@ bool HttpsWebSocketServer::handleUpgrade(HttpSocket * socket, const HttpRequest 
 {
     if (request.getHeader(http::Upgrade).getValue() == "websocket")
     {
-        WebSocket * websocket = new WebSocket(this);
+        WebsSocket * websocket = new WebsSocket(this, m_certificate, m_privateKey);
 
         websocket->upgrade(socket, request);
 

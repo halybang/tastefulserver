@@ -6,15 +6,15 @@
 
 #include <tastefulserver/TcpServer.h>
 #include <tastefulserver/AbstractSocket.h>
-#include <tastefulserver/WebSocketHandler.h>
+#include <tastefulserver/MqttSocketHandler.h>
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API WebSocketServer : public TcpServer, public WebSocketHandler
+class TASTEFULSERVER_API MqttSocketServer : public TcpServer, public MqttSocketHandler
 {
 public:
-    WebSocketServer();
-    ~WebSocketServer();
+    MqttSocketServer();
+    ~MqttSocketServer();
 
 protected:
     virtual AbstractSocket * createSocket() override;
@@ -23,8 +23,8 @@ protected:
 
     //virtual void handleText(WebSocket * socket, const QByteArray & text) override;
     //virtual void handleBinary(WebSocket * socket, const QByteArray & binary) override;
-    //virtual void connectionEstablished(WebSocket * socket) override;
-    //virtual void connectionClosed(WebSocket * socket) override;
+    //virtual void connectionEstablished(const HttpRequest & request, WebSocket * socket) override;
+    //virtual void connectionClosed(const HttpRequest & request, WebSocket * socket) override;
 };
 
 } // namespace tastefulserver
