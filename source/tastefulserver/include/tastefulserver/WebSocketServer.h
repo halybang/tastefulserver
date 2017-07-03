@@ -10,7 +10,7 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API WebSocketServer : public TcpServer, public WebSocketHandler
+class TASTEFULSERVER_API WebSocketServer : public TcpServer, WebSocketHandler
 {
 public:
     WebSocketServer();

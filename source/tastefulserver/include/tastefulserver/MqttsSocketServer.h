@@ -13,7 +13,7 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API MqttsSocketServer : public TcpServer, public MqttSocketHandler
+class TASTEFULSERVER_API MqttsSocketServer : public TcpServer, MqttSocketHandler
 {
 public:
     MqttsSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey);

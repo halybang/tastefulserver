@@ -8,13 +8,13 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API HttpWebSocketServer : public HttpCallbackServer, public WebSocketHandler
+class TASTEFULSERVER_API HttpWebSocketServer : public HttpCallbackServer, WebSocketHandler
 {
 public:
     HttpWebSocketServer(const RequestCallback & callback, int numThreads = 1);
     virtual ~HttpWebSocketServer();
 
-protected:    
+protected:
     //virtual AbstractSocket * createSocket() override;
 
     // --- handling ---

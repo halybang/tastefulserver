@@ -10,7 +10,7 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API MqttSocketServer : public TcpServer, public MqttSocketHandler
+class TASTEFULSERVER_API MqttSocketServer : public TcpServer, MqttSocketHandler
 {
 public:
     MqttSocketServer();

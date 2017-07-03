@@ -6,7 +6,7 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API HttpsWebSocketServer : HttpsCallbackServer, public WebSocketHandler
+class TASTEFULSERVER_API HttpsWebSocketServer : public HttpsCallbackServer, WebSocketHandler
 {
 public:
     HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey, const RequestCallback & callback);
