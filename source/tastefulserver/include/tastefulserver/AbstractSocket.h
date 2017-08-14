@@ -37,8 +37,8 @@ protected:
     Connection * m_connection;
     QAbstractSocket * m_socket;
 
-    void connectSocket();
-    void disconnectSocket();
+    virtual void connectSocket();
+    virtual void disconnectSocket();
 
     void setConnection(Connection * connection);
 
