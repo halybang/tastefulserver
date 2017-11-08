@@ -6,10 +6,10 @@
 
 namespace tastefulserver {
 
-class TASTEFULSERVER_API HttpsWebSocketServer : public HttpsCallbackServer, WebSocketHandler
+class TASTEFULSERVER_API HttpsWebSocketServer : public HttpsServer, WebSocketHandler
 {
 public:
-    HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey, const RequestCallback & callback);
+    HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey);
     virtual ~HttpsWebSocketServer();
 
 protected:
@@ -18,7 +18,7 @@ protected:
 
     // TODO: Verify upgrade function
     virtual bool handleUpgrade(HttpSocket * socket, const HttpRequest & request) override;
-    //virtual void handleRequest(HttpSocket * socket, const HttpRequest & request) override;
+    virtual bool handleRequest(HttpSocket * socket, const HttpRequest & request) override;
 
     //virtual void handleText(WebSocket * socket, const QByteArray & text) override;
     //virtual void handleBinary(WebSocket * socket, const QByteArray & binary) override;

@@ -7,13 +7,26 @@
 
 namespace tastefulserver {
 
-HttpsWebSocketServer::HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey, const RequestCallback & callback)
-    :HttpsCallbackServer(certificate, privateKey, callback)
+HttpsWebSocketServer::HttpsWebSocketServer(const QSslCertificate & certificate, const QSslKey & privateKey)
+: HttpsServer(certificate, privateKey)
 {
 }
 
 HttpsWebSocketServer::~HttpsWebSocketServer()
 {
+}
+bool HttpsWebSocketServer::handleRequest(HttpSocket * socket, const HttpRequest & request)
+{
+    // Do lookup controller, then parse param to controller
+
+    if (request.hasHeader(http::Upgrade))
+    {
+        if (handleUpgrade(socket, request))
+            return false;
+    }
+    socket->send(HttpResponse(http::NotImplemented));
+    return true;
+    //return HttpSocketHandler::handleRequest();
 }
 
 bool HttpsWebSocketServer::handleUpgrade(HttpSocket * socket, const HttpRequest & request)

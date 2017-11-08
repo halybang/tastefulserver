@@ -10,7 +10,7 @@ namespace tastefulserver {
 class TASTEFULSERVER_API HttpSocketHandler
 {
 public:
-    virtual void handleRequest(HttpSocket * socket, const HttpRequest & request) = 0;
+    virtual bool handleRequest(HttpSocket * socket, const HttpRequest & request) = 0;
     virtual void handleBadRequest(HttpSocket * socket);
     virtual bool handleUpgrade(HttpSocket * socket, const HttpRequest & request);
 };

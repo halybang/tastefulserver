@@ -88,7 +88,10 @@ void ThreadPool::stop()
 
     for (TaskThread * thread : d->m_threads)
     {
-        thread->terminate();
+        //thread->terminate();
+        thread->quit();
+        //thread->deleteLater();
+        thread->wait();
         delete thread;
     }
     d->m_started = false;

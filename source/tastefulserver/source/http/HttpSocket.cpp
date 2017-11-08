@@ -45,13 +45,13 @@ void HttpSocket::receiveData(const QByteArray & data)
         HttpRequest request = m_parser.popReadyRequest();
         addConnectionInfo(request);
 
-        if (request.hasHeader(http::Upgrade))
-        {
-            if (m_handler->handleUpgrade(this, request))
-                break;
-        }
+//        if (request.hasHeader(http::Upgrade))
+//        {
+//            if (m_handler->handleUpgrade(this, request))
+//                break;
+//        }
 
-        m_handler->handleRequest(this, request);
+        if(!m_handler->handleRequest(this, request)) break;
     }
 }
 

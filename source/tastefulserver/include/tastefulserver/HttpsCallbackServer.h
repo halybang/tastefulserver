@@ -27,7 +27,7 @@ private:
 
     // --- handling ---
 
-    virtual void handleRequest(HttpSocket * socket, const HttpRequest & request) override;
+    virtual bool handleRequest(HttpSocket * socket, const HttpRequest & request) override;
 };
 
 } // namespace tastefulserver

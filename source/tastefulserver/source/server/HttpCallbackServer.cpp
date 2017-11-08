@@ -12,9 +12,10 @@ HttpCallbackServer::~HttpCallbackServer()
 {
 }
 
-void HttpCallbackServer::handleRequest(HttpSocket * socket, const HttpRequest & request)
+bool HttpCallbackServer::handleRequest(HttpSocket * socket, const HttpRequest & request)
 {
     socket->send(m_callback(request));
+    return true;
 }
 
 } // namespace tastefulserver
